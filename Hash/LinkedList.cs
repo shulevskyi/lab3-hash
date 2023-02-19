@@ -1,72 +1,61 @@
 namespace Hash;
 
-public class Node
+public class LinkedListNode
 {
-    public Node next;
-    public int data;
+    public KeyValuePair<int, string> Pair { get; }
+        
+    public LinkedListNode Next { get; set; }
 
-    // The data itself is KeyValuePair pair
-    public Node(int data)
+    public LinkedListNode(int key, string value, LinkedListNode next = null)
     {
-        this.data = data;
+        Pair = new KeyValuePair<int, string>(key, value);
+        Next = next;
     }
-
 }
 
 public class LinkedList
 {
-    Node head;
+    LinkedListNode head;
     
-    public void append(int data)
+    public void Append(int key, string value)
     {
-        
-        // Creating a head if there is no head
         if (head == null)
         {
-            head = new Node(data); 
+            head = new LinkedListNode(key, value);
             return;
         }
         
-        // Start from the head
-        Node current = head;
+        LinkedListNode current = head;
         
-        // Walking through linked list until next element is not null
-        while (current.next != null)
+        while (current.Next != null)
         {
-            current = current.next;
+            current = current.Next;
         }
             
-        // If it is null we append our data to the end of the list
-        current.next = new Node(data);
+        current.Next = new LinkedListNode(key, value);
     }
 
-    public void deleteWithValue(int data)
+    public void Delete(int key)
     {
         if (head == null) return;
         
-        // Expression if node that should be removed is head
-        if (head.data == data)
+        if (head.Pair.Key == key)
         {
-            head = head.next;
+            head = head.Next;
             return;
         }
         
-        Node current = head;
+        LinkedListNode current = head;
 
-        while (current.next != null)
+        while (current.Next != null)
         {
-            if (current.next.data == data)
+            if (current.Next.Pair.Key == key)
             {
-                // By doing so we "remove" nsuch node by making pointer to the next value of data
-                current.next = current.next.next;
+                current.Next = current.Next.Next;
                 return;
             }
 
-            current = current.next;
-            
+            current = current.Next;
         }
-
-        
     }
-    
 }

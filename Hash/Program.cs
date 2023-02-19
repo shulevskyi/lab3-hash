@@ -29,10 +29,10 @@ namespace YourNamespace
             //Console.WriteLine("Word ID: {0}, Definition: {1}", storedWord1.Key, storedWord1.Value);
             //Console.WriteLine("Word ID: {0}, Definition: {1}", KeyValuePair.Pair, storedWord1.Value);
             
-            LinkedListNode smth1 = new LinkedListNode(word1);
+            LinkedListNode smth1 = new LinkedListNode(word1.Key, word1.Value);
             
             
-            KeyValuePair pair = smth1.Pair;
+            KeyValuePair<int, string> pair = smth1.Pair;
             int key = pair.Key;
             Console.WriteLine(pair.Key);
 
