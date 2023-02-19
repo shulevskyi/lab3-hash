@@ -19,6 +19,14 @@ public class LinkedList
     
     public void append(int data)
     {
+        
+        // Creating a head if there is no head
+        if (head == null)
+        {
+            head = new Node(data); 
+            return;
+        }
+        
         // Start from the head
         Node current = head;
         
@@ -31,4 +39,34 @@ public class LinkedList
         // If it is null we append our data to the end of the list
         current.next = new Node(data);
     }
+
+    public void deleteWithValue(int data)
+    {
+        if (head == null) return;
+        
+        // Expression if node that should be removed is head
+        if (head.data == data)
+        {
+            head = head.next;
+            return;
+        }
+        
+        Node current = head;
+
+        while (current.next != null)
+        {
+            if (current.next.data == data)
+            {
+                // By doing so we "remove" nsuch node by making pointer to the next value of data
+                current.next = current.next.next;
+                return;
+            }
+
+            current = current.next;
+            
+        }
+
+        
+    }
+    
 }
