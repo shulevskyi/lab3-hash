@@ -2,11 +2,11 @@ namespace Hash;
 
 public class KeyValuePair
 {
-    public int Key { get; set; }
+    public string Key { get; set; }
 
     public string Value { get; set; }
 
-    public KeyValuePair(int key, string value)
+    public KeyValuePair(string key, string value)
     {
         Key = key;
         Value = value;
