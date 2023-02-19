@@ -1,57 +1,33 @@
 ﻿using System;
-using System.Collections;
-using Hash;
-using KeyValuePair = Hash.KeyValuePair;
-using HashCode = Hash.HashCode;
 
-namespace YourNamespace
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        HashCode wordTable = new HashCode(5);
+
+        // A little bit of hard coding
+        wordTable.Insert("Unknown", "The Brave the World");
+        wordTable.Insert("C#", "Love it");
+        wordTable.Insert("Life", "is good");
+        wordTable.Insert("Billions", "great show on HBO");
+        wordTable.Insert("Pills", "Do not use em :)");
+
+        wordTable.PrintTable();
+
+        
+        Console.WriteLine("Enter a word to search in the hash table:");
+        string userInput = Console.ReadLine();
+
+        string result = wordTable.Find(userInput);
+
+        if (result != null)
         {
-            Hashtable wordTable = new Hashtable();
-            
-            
-            KeyValuePair word1 = new KeyValuePair("Auto", "Automachine");
-            KeyValuePair word2 = new KeyValuePair("Dry", "Drying");
-            KeyValuePair word3 = new KeyValuePair("Life", "Lyfing");
-            KeyValuePair word4 = new KeyValuePair("Billion", "billlions that what i want");
-            KeyValuePair word5 = new KeyValuePair("MModa", "Modafinil");
-    
-            wordTable.Add(word1.Value, word1);
-            wordTable.Add(word2.Value, word2);
-            wordTable.Add(word3.Value, word3);
-            wordTable.Add(word4.Value, word4);
-            wordTable.Add(word5.Value, word5);
-
-            // Create a new HashCode object
-            HashCode word11 = new HashCode();
-            
-            word11.Print(wordTable);
-            
-            Console.WriteLine("Hashcode: " + word11.GetHash(word1.Key, wordTable));
-            
-            // Insert
-            Console.WriteLine("Inserted? " + word11.Insert(word1.Key, word1.Value, wordTable));
-            
-            word11.Print(wordTable);
-
-
-
-            //KeyValuePair storedWord1 = (KeyValuePair)wordTable[word1.Value];
-            
-            //Console.WriteLine("Word ID: {0}, Definition: {1}", storedWord1.Key, storedWord1.Value);
-            //Console.WriteLine("Word ID: {0}, Definition: {1}", KeyValuePair.Pair, storedWord1.Value);
-            
-            //LinkedListNode smth1 = new LinkedListNode(word1.Key, word1.Value);
-            
-            
-            //KeyValuePair<int, string> pair = smth1.Pair;
-            //int key = pair.Key;
-            //Console.WriteLine(pair.Key);
-
+            Console.WriteLine($"Found value: {result}");
+        }
+        else if (result == null)
+        {
+            Console.WriteLine("Sorry... Word not found");
         }
     }
 }
-

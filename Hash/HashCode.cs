@@ -1,77 +1,82 @@
-using System.Collections;
-
-namespace Hash;
+using System;
 
 public class HashCode
-
 {
+    
+    // The size of the hash table
+    private readonly int _size;
+    
+    // An array of linked lists to store pairs (key-value)
+    private readonly LinkedList<KeyValuePair<string, string>>[] _table;
 
-    
-    
-    // Print the table if null then prints index and "-" else prints the index and the value
-    
-    public void Print(Hashtable wordTable)
+    public HashCode(int size)
     {
-        Console.WriteLine("Table:");
-        for (int i = 0; i < wordTable.Count; i++)
-        {
-            if (wordTable[i] == null)
-            {
-                Console.WriteLine(i + " -- ");
-            }
-            else
-            {
-                Console.WriteLine(i + " - " + wordTable[i]);
-            }
-        }
+        _size = size;
+        _table = new LinkedList<KeyValuePair<string, string>>[size];
     }
-    
-    // boolean functio that inserts the word in the table
-    
-    public bool Insert(string key, string value, Hashtable wordTable)
-    {
-        int hash = GetHash(key, wordTable);
-        if (wordTable[hash] == null)
-        {
-            wordTable[hash] = value;
-            return true;
-        }
 
-        return false;
-    }
-    
-    // lookup function to find the word in the table by key
-    
-    public string Find(string key, Hashtable wordTable)
+    public void Insert(string key, string value)
     {
+        int index = GetHash(key);
+        if (_table[index] == null)
+        {
+            // If null create a new linked list
+            _table[index] = new LinkedList<KeyValuePair<string, string>>();
+        }
         
-        int hashkey = GetHash(key, wordTable);
-        Console.WriteLine(hashkey);
-        if (wordTable[hashkey] != null)
-        {
-            return wordTable[hashkey].ToString();
-        }
+        // Add pair to the end of linked list for the index
+        _table[index].AddLast(new KeyValuePair<string, string>(key, value));
+    }
 
+    public string Find(string key)
+    {
+        int index = GetHash(key);
+        LinkedList<KeyValuePair<string, string>> list = _table[index];
+        if (list != null)
+        {
+            
+            // If Collision, search for the key in the linked list (a little bit slower)
+            foreach (KeyValuePair<string, string> pair in list)
+            {
+                if (pair.Key == key)
+                {
+                    return pair.Value;
+                }
+            }
+        }
+        Console.WriteLine("Word not found");
         return null;
     }
-    
-    
-    
-    // Function GetHash that returns the hashcode of the word
-    
-    public int GetHash(string key, Hashtable wordTable)
+
+    private int GetHash(string key)
     {
         int hash = 0;
         for (int i = 0; i < key.Length; i++)
         {
             hash += key[i];
         }
-
-        return hash % wordTable.Count;
+        return hash % _size;
     }
-    
-    
-    
-    
 
+    public void PrintTable()
+    {
+        for (int i = 0; i < _size; i++)
+        {
+            Console.Write($"Index {i}: ");
+            LinkedList<KeyValuePair<string, string>> list = _table[i];
+            if (list == null)
+            {
+                Console.WriteLine("-");
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> pair in list)
+                {
+                    // Make a pointer visible for better understanding
+                    Console.Write($"[{pair.Key}, {pair.Value}] -> ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
 }
