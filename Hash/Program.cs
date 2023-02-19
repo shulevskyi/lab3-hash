@@ -25,9 +25,18 @@ namespace YourNamespace
             wordTable.Add(word4.Value, word4);
             wordTable.Add(word5.Value, word5);
 
+            // Create a new HashCode object
             HashCode word11 = new HashCode();
             
-            Console.WriteLine(word11.GetHash(word4.Key, wordTable));
+            word11.Print(wordTable);
+            
+            Console.WriteLine("Hashcode: " + word11.GetHash(word1.Key, wordTable));
+            
+            // Insert
+            Console.WriteLine("Inserted? " + word11.Insert(word1.Key, word1.Value, wordTable));
+            
+            word11.Print(wordTable);
+
 
 
             //KeyValuePair storedWord1 = (KeyValuePair)wordTable[word1.Value];
