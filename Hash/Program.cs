@@ -29,5 +29,7 @@ class Program
         {
             Console.WriteLine("Sorry... Word not found");
         }
+        
+        Console.WriteLine(wordTable.LoadFactor());
     }
 }

@@ -79,4 +79,24 @@ public class HashCode
             }
         }
     }
+    
+    // Load factor
+    
+    public double LoadFactor() 
+    {
+         int count = 0;
+         for (int i = 0; i < _size; i++)
+         {
+             LinkedList<KeyValuePair<string, string>> list = _table[i];
+             if (_table[i] != null)
+             {
+                 foreach (KeyValuePair<string, string> pair in list)
+                 {
+
+                     count++;
+                 }
+             }
+         }
+         return count / _size; 
+    }
 }
