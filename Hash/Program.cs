@@ -31,5 +31,10 @@ class Program
         }
         
         Console.WriteLine(wordTable.LoadFactor());
+        
+        wordTable.AutoExpansion();
+        
+        //Console.WriteLine(wordTable.LoadFactor());
+        wordTable.PrintTable();
     }
 }

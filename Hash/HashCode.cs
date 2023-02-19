@@ -4,10 +4,10 @@ public class HashCode
 {
     
     // The size of the hash table
-    private readonly int _size;
+    private int _size;
     
     // An array of linked lists to store pairs (key-value)
-    private readonly LinkedList<KeyValuePair<string, string>>[] _table;
+    private LinkedList<KeyValuePair<string, string>>[] _table;
 
     public HashCode(int size)
     {
@@ -85,18 +85,53 @@ public class HashCode
     public double LoadFactor() 
     {
          int count = 0;
-         for (int i = 0; i < _size; i++)
+         for (int i = 0; i < (float)_size; i++)
          {
              LinkedList<KeyValuePair<string, string>> list = _table[i];
              if (_table[i] != null)
              {
                  foreach (KeyValuePair<string, string> pair in list)
                  {
-
-                     count++;
+                     count ++;
                  }
              }
          }
-         return count / _size; 
+         // return float because the result is a decimal number
+         return (float)count / _size;
+            
+         
+         
+         
+    }
+    
+    // Auto expansion of the hash table when the load factor is greater than 0.7
+    
+    public void AutoExpansion()
+    {
+        // Actually there should smht between 0.6 and 0.7
+        if (LoadFactor() > 0.7)
+        {
+            // Create a new hash table with double size
+            HashCode newTable = new HashCode(_size * 2);
+            
+            // Copy all pairs from the old table to the new one
+            for (int i = 0; i < _size; i++)
+            {
+                LinkedList<KeyValuePair<string, string>> list = _table[i];
+                if (list != null)
+                {
+                    foreach (KeyValuePair<string, string> pair in list)
+                    {
+                        newTable.Insert(pair.Key, pair.Value);
+                    }
+                }
+            }
+            
+            // Replace the old table with the new one
+            _table = newTable._table;
+            _size = newTable._size;
+            
+            Console.WriteLine("Updated LoadFactor: " + newTable.LoadFactor());
+        }
     }
 }
