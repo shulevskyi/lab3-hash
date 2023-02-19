@@ -1,0 +1,15 @@
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/bin/Debug/net7.0/Hash
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/bin/Debug/net7.0/Hash.deps.json
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/bin/Debug/net7.0/Hash.runtimeconfig.json
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/bin/Debug/net7.0/Hash.dll
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/bin/Debug/net7.0/Hash.pdb
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.csproj.AssemblyReference.cache
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.GeneratedMSBuildEditorConfig.editorconfig
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.AssemblyInfoInputs.cache
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.AssemblyInfo.cs
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.csproj.CoreCompileInputs.cache
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.dll
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/refint/Hash.dll
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.pdb
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/Hash.genruntimeconfig.cache
+/Users/danielshulevskiy/RiderProjects/Hash/Hash/obj/Debug/net7.0/ref/Hash.dll
