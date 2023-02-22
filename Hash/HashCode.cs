@@ -104,16 +104,14 @@ public class HashCode
          
     }
     
-    // Auto expansion of the hash table when the load factor is greater than 0.7
-    
     public void AutoExpansion()
     {
-        // Actually there should smht between 0.6 and 0.7
-        if (LoadFactor() > 0.7)
+        // check if the load factor is greater than or equal to 0.7
+        if (LoadFactor() >= 0.7)
         {
             // Create a new hash table with double size
             HashCode newTable = new HashCode(_size * 2);
-            
+
             // Copy all pairs from the old table to the new one
             for (int i = 0; i < _size; i++)
             {
@@ -126,12 +124,13 @@ public class HashCode
                     }
                 }
             }
-            
+
             // Replace the old table with the new one
             _table = newTable._table;
             _size = newTable._size;
-            
-            Console.WriteLine("Updated LoadFactor: " + newTable.LoadFactor());
+
+            //Console.WriteLine("Updated LoadFactor: " + newTable.LoadFactor());
         }
     }
+
 }
