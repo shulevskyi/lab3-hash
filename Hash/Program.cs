@@ -5,15 +5,27 @@ class Program
     static void Main()
     {
         HashCode wordTable = new HashCode(5);
+        
+        // Insert /Users/danielshulevskiy/RiderProjects/Hash/Hash into the hash table
 
-        // A little bit of hard coding
-        wordTable.Insert("Unknown", "The Brave the World");
-        wordTable.Insert("C#", "Love it");
-        wordTable.Insert("Life", "is good");
-        wordTable.Insert("Billions", "great show on HBO");
-        wordTable.Insert("Pills", "Do not use em :)");
+        // Open the file and read its contents
+        string[] lines;
+        using (StreamReader reader = new StreamReader("../../../dictionary.txt"))
+        {
+            lines = reader.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        }
 
-        wordTable.PrintTable();
+        // Insert words and definitions into the table
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(';');
+            if (parts.Length == 2)
+            {
+                wordTable.Insert(parts[0], parts[1]);
+            }
+        }
+        
+
 
         
         Console.WriteLine("Enter a word to search in the hash table:");
@@ -35,6 +47,6 @@ class Program
         wordTable.AutoExpansion();
         
         //Console.WriteLine(wordTable.LoadFactor());
-        wordTable.PrintTable();
+        //wordTable.PrintTable();
     }
 }
