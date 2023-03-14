@@ -17,15 +17,20 @@ public class HashCode
 
     public void Insert(string key, string value)
     {
+        // Create a new pair
+        KeyValuePair<string, string> pair = new KeyValuePair<string, string>(key, value);
+        
+        // Get the hash of the key
         int index = GetHash(key);
+        
+        // If the cell is empty, create a new linked list
         if (_table[index] == null)
         {
-            // If null create a new linked list
             _table[index] = new LinkedList<KeyValuePair<string, string>>();
         }
         
-        // Add pair to the end of linked list for the index
-        _table[index].AddLast(new KeyValuePair<string, string>(key, value));
+        // Insert the pair into the linked list
+        _table[index].AddLast(pair);
     }
 
     public string Find(string key)
@@ -48,6 +53,7 @@ public class HashCode
         return null;
     }
 
+    
     private int GetHash(string key)
     {
         int hash = 0;
@@ -82,8 +88,9 @@ public class HashCode
     
     // Load factor
     
-    public double LoadFactor() 
+    public double LoadFactor()
     {
+         int nulcount = 0;
          int count = 0;
          for (int i = 0; i < (float)_size; i++)
          {
@@ -95,14 +102,21 @@ public class HashCode
                      count ++;
                  }
              }
+             else if (_table[i] == null)
+             {
+                 nulcount ++; 
+             }
          }
+         
+         //Console.WriteLine(count);
+         //Console.WriteLine(nulcount);
          // return float because the result is a decimal number
          return (float)count / _size;
-            
-         
-         
-         
+
     }
+    
+    // load factor, count the non-empty buckets and divide by the size of the table 
+    
     
     public void AutoExpansion()
     {
@@ -131,6 +145,8 @@ public class HashCode
 
             //Console.WriteLine("Updated LoadFactor: " + newTable.LoadFactor());
         }
+        
+        Console.WriteLine(LoadFactor());
     }
 
 }
