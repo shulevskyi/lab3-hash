@@ -90,8 +90,7 @@ public class HashCode
     
     public double LoadFactor()
     {
-         int nulcount = 0;
-         int count = 0;
+        int count = 0;
          for (int i = 0; i < (float)_size; i++)
          {
              LinkedList<KeyValuePair<string, string>> list = _table[i];
@@ -102,10 +101,6 @@ public class HashCode
                      count ++;
                  }
              }
-             else if (_table[i] == null)
-             {
-                 nulcount ++; 
-             }
          }
          
          //Console.WriteLine(count);
@@ -114,39 +109,37 @@ public class HashCode
          return (float)count / _size;
 
     }
-    
-    // load factor, count the non-empty buckets and divide by the size of the table 
-    
-    
-    public void AutoExpansion()
-    {
-        // check if the load factor is greater than or equal to 0.7
-        if (LoadFactor() >= 0.7)
-        {
-            // Create a new hash table with double size
-            HashCode newTable = new HashCode(_size * 2);
 
-            // Copy all pairs from the old table to the new one
-            for (int i = 0; i < _size; i++)
+
+    public void Expand()
+    {
+        // Create a new hash table with size that gives a load factor of 0.5
+
+        double nonnull = _size * LoadFactor();
+        double newsize = nonnull / 0.75;
+        
+        // round up newsize to the closest integer
+        
+        int newsizes = (int)Math.Ceiling(newsize);
+        Console.WriteLine(newsizes);
+
+        HashCode newTable = new HashCode(newsizes);
+        
+        // Copy all pairs from the old table to the new one
+        for (int i = 0; i < _size; i++)
+        {
+            LinkedList<KeyValuePair<string, string>> list = _table[i];
+            if (list != null)
             {
-                LinkedList<KeyValuePair<string, string>> list = _table[i];
-                if (list != null)
+                foreach (KeyValuePair<string, string> pair in list)
                 {
-                    foreach (KeyValuePair<string, string> pair in list)
-                    {
-                        newTable.Insert(pair.Key, pair.Value);
-                    }
+                    newTable.Insert(pair.Key, pair.Value);
                 }
             }
-
-            // Replace the old table with the new one
-            _table = newTable._table;
-            _size = newTable._size;
-
-            //Console.WriteLine("Updated LoadFactor: " + newTable.LoadFactor());
         }
         
-        Console.WriteLine(LoadFactor());
+        // Replace the old table with the new one
+        _table = newTable._table;
+        _size = newTable._size;
     }
-
 }

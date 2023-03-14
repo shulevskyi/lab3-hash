@@ -47,10 +47,15 @@ class Program
         }
         
         Console.WriteLine(wordTable.LoadFactor());
+
+        // Auto-expantion 
         
-        wordTable.AutoExpansion();
+        if (wordTable.LoadFactor() > 0.75)
         
-        //Console.WriteLine(wordTable.LoadFactor());
-        //wordTable.PrintTable();
+        {
+             wordTable.Expand();
+             Console.WriteLine("The hash table has been expanded: " + wordTable.LoadFactor());
+        }
+        
     }
 }
