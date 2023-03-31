@@ -52,6 +52,52 @@ public class HashCode
         Console.WriteLine("Word not found");
         return null;
     }
+    
+    public void InsertAfterKey(string existingKey, string newKey, string newValue)
+    {
+        int existingKeyIndex = GetHash(existingKey);
+        LinkedList<KeyValuePair<string, string>> existingList = _table[existingKeyIndex];
+
+        if (existingList != null)
+        {
+            // Find the node with the existing key
+            LinkedListNode<KeyValuePair<string, string>> currentNode = existingList.First;
+            while (currentNode != null)
+            {
+                if (currentNode.Value.Key == existingKey)
+                {
+                    // Create new KeyValuePair
+                    KeyValuePair<string, string> newPair = new KeyValuePair<string, string>(newKey, newValue);
+
+                    // Insert new KeyValuePair after the existing key
+                    existingList.AddAfter(currentNode, newPair);
+
+                    existingList.RemoveLast();
+
+                    // Add the new key-value pair to the correct index based on its hash
+                    int newKeyIndex = GetHash(newKey);
+                    if (_table[newKeyIndex] == null)
+                    {
+                        _table[newKeyIndex] = new LinkedList<KeyValuePair<string, string>>();
+                    }
+                    _table[newKeyIndex].AddLast(newPair);
+
+                    return;
+                }
+                currentNode = currentNode.Next;
+            }
+        }
+    }
+
+    
+    public int GetLinkedListLength(string key)
+    {
+        int index = GetHash(key);
+        LinkedList<KeyValuePair<string, string>> list = _table[index];
+
+        return list?.Count ?? 0;
+    }
+
 
     
     private int GetHash(string key)
